@@ -2,9 +2,11 @@ import requests
 import yaml
 from flask import Flask, request, jsonify
 
-
-class RecipeGeneration:
+class Chatbot:
     def __init__(self):
+        pass
+
+    def chat(self, message: str) -> str:
         with open("config.yaml", "r") as file:
             config = yaml.safe_load(file)
 
@@ -19,8 +21,6 @@ class RecipeGeneration:
             "Content-Type": "application/json",
             "Authorization": "Bearer " + self.api_key
         }
-
-    def chat(self, message: str) -> str:
         data = {
             "message": message,
             "mode": "chat",
@@ -33,21 +33,10 @@ class RecipeGeneration:
             json=data
         )
         try:
-            return chat_response.json()["textResponse"]
+            return chat_response.json()['textResponse']
         except ValueError:
             return "Response is not valid JSON"
         except Exception as e:
             return f"Chat request failed. Error: {e}"
 
-app = Flask(__name__)
-recipeGeneration = RecipeGeneration()
 
-@app.route("/recipe-generation", methods=["POST"])
-def recipe_generation():
-    data = request.get_json()
-    message = data.get("message", "")
-    response = recipeGeneration.chat(message)
-    return jsonify({"response": response})
-
-if __name__ == "__main__":
-    app.run(debug=True)

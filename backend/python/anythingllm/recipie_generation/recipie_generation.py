@@ -2,8 +2,12 @@ import requests
 import yaml
 from flask import Flask, request, jsonify
 
-class IngredientsAwareness:
+
+class RecipeGeneration:
     def __init__(self):
+        pass
+
+    def chat(self, message: str) -> str:
         with open("config.yaml", "r") as file:
             config = yaml.safe_load(file)
 
@@ -19,7 +23,6 @@ class IngredientsAwareness:
             "Authorization": "Bearer " + self.api_key
         }
 
-    def chat(self, message: str) -> str:
         data = {
             "message": message,
             "mode": "chat",
@@ -38,15 +41,3 @@ class IngredientsAwareness:
         except Exception as e:
             return f"Chat request failed. Error: {e}"
 
-app = Flask(__name__)
-ingredientsAwareness = IngredientsAwareness()
-
-@app.route("/ingredients-awareness", methods=["POST"])
-def ingredients_awareness():
-    data = request.get_json()
-    message = data.get("message", "")
-    response = ingredientsAwareness.chat(message)
-    return jsonify({"response": response})
-
-if __name__ == "__main__":
-    app.run(debug=True)

@@ -1,0 +1,25 @@
+{
+  "name": "eatsmart_edge",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@lmstudio/sdk": "^1.2.1",
+    "cosine-similarity": "^1.0.1",
+    "express": "^5.1.0",
+    "multer": "^2.0.1",
+    "nodemon": "^3.1.10",
+    "openfoodfacts-nodejs": "^0.1.0",
+    "pdf-parse": "^1.1.1",
+    "zod": "^3.25.64",
+    "zod-to-json-schema": "^3.24.5"
+  }
+}
