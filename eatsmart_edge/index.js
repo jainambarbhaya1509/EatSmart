@@ -6,6 +6,7 @@ import {
   ocrScannerContext,
   chatbotContext,
   heightEstimationContext,
+  cookedFoodContext,
 } from './src/context/contexts.js';
 
 import { homemadeAlternatives } from './src/utils/homemade_alternatives.js';
@@ -16,6 +17,7 @@ import OpenFoodFacts from "openfoodfacts-nodejs";
 import multer from 'multer';
 import { ingredientsAwareness } from './src/utils/ingredient_awareness.js';
 import { heightEstimation } from './src/utils/height_estimation.js';
+import { cookedFoodAnalysis } from './src/utils/cooked_food_analysis.js';
 
 const app = express();
 app.use(express.json());
@@ -94,6 +96,17 @@ app.post('/ocr-analysis', upload.single('image'), async (req, res) => {
   try {
     const imagePath = req.file.path;
     const result = await ocrAnalysis(ocrScannerContext, imagePath);
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to perform OCR.', details: err.message });
+  }
+});
+
+app.post('/cooked-food-analysis', upload.single('image'), async (req, res) => {
+  try {
+    const imagePath = req.file.path;
+    const result = await cookedFoodAnalysis(cookedFoodContext, imagePath);
     console.log(result);
     res.json(result);
   } catch (err) {

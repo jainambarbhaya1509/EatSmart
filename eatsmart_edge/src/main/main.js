@@ -19,7 +19,7 @@ export async function loadModel(context, query) {
 
 export async function loadImageModel(context, imagePath) {
 
-  const model = (await client.llm.model("google/gemma-3-4b"));
+  const model = (await client.llm.model("qwen/qwen2.5-vl-7b"));
   const image = await client.files.prepareImage(imagePath);
   
   let chat = Chat.from([
@@ -42,7 +42,7 @@ export async function loadOCRModel(context, imagePath) {
   return { model, chat };
 }
 
-export async function loadChatbotModel(context) {
+export async function loadChatbotModel() {
   const chat = new Chat();
   const model = await client.llm.chat({ model: "google/gemma-3-4b" });
 
