@@ -61,5 +61,27 @@ def stt():
         if os.path.exists(tmp_path):
             os.remove(tmp_path)
 
+
+@app.route('/translate', methods=['POST'])
+def translate():
+    data = request.get_json()
+    print(f"Received data: {data}")
+    if not data or 'text' not in data:
+        return jsonify({'error': 'Missing text'}), 400
+
+    text = data['text']
+
+    try:
+        response = client.text.translate(
+            input=text,
+            source_language_code="en-IN",
+            target_language_code="hi-IN",
+            model="sarvam-translate:v1"
+        )
+        return jsonify({'translated_text': response.translated_text})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 if __name__ == '__main__':
     app.run(debug=True)
