@@ -106,7 +106,7 @@ app.post('/ocr-analysis', upload.single('image'), async (req, res) => {
 app.post('/cooked-food-analysis', upload.single('image'), async (req, res) => {
   try {
     const imagePath = req.file.path;
-    const result = await cookedFoodAnalysis(cookedFoodContext, imagePath);
+    const result = await cookedFoodAnalysis(cookedFoodContext, "Which food is in the image", imagePath);
     console.log(result);
     res.json(result);
   } catch (err) {
@@ -114,16 +114,16 @@ app.post('/cooked-food-analysis', upload.single('image'), async (req, res) => {
   }
 });
 
-// app.post('/height-estimation', upload.single('image'), async (req, res) => {
-//   try {
-//     const imagePath = req.file.path;
-//     const result = await heightEstimation(heightEstimationContext, imagePath);
-//     console.log(result);
-//     res.json(result);
-//   } catch (err) {
-//     res.status(500).json({ error: 'Failed to perform OCR.', details: err.message });
-//   }
-// });
+app.post('/height-estimation', upload.single('image'), async (req, res) => {
+  try {
+    const imagePath = req.file.path;
+    const result = await heightEstimation(heightEstimationContext, "What is the height of the person (X Feet Y Inch) wrt the distance from the phone and surroundings ?" ,imagePath);
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to perform OCR.', details: err.message });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

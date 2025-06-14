@@ -13,19 +13,20 @@ export async function loadModel(context, query) {
     { role: "system", content: context },
     { role: "user", content: query },
   ]);
-
   return { model, chat };
 }
 
-export async function loadImageModel(context, imagePath) {
+export async function loadImageModel(context, query, imagePath) {
 
-  const model = (await client.llm.model("qwen/qwen2.5-vl-7b"));
+  const model = (await client.llm.model("google/gemma-3-4b"));
   const image = await client.files.prepareImage(imagePath);
-  
+
   let chat = Chat.from([
     { role: "system", content: context },
-    { role: "user", images: [image] },
+    { role: "user", content: query, images: [image] },
   ]);
+
+
 
   return { model, chat };
 }

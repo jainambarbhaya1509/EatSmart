@@ -7,9 +7,9 @@ import { HeightEstSchema, heightSchema } from '../schema/height_estimation_schem
 // Height Estimation -- Customer Retention Feature
 // ------------------------------------------------
 
-export async function heightEstimation(context, imgPath) {
+export async function heightEstimation(context, query, imgPath) {
     try {
-        const { model, chat } = await loadImageModel(context, imgPath);
+        const { model, chat } = await loadImageModel(context, query, imgPath);
 
         const prediction = await model.respond(chat, {
             structured: {
