@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify, send_file
-from anythingllm.recipie_generation.recipie_generation import RecipeGeneration
-from anythingllm.ingredients.ingredients_awareness import IngredientsAwareness
-from anythingllm.health_chatbot.chatbot import Chatbot
+from anythingllm.recipie_generation import RecipeGeneration
+from anythingllm.ingredients_awareness import IngredientsAwareness
+from anythingllm.chatbot import Chatbot
 from sarvamai import SarvamAI
 from sarvamai.play import save
 import tempfile

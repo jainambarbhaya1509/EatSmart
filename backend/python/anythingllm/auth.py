@@ -31,13 +31,9 @@ def auth(
     print(auth_response.json())
 
 if __name__ == "__main__":
-    # load config from yaml
-    with open("config.yaml", "r") as file:
-        config = yaml.safe_load(file)
-
     # get the api_key and base_url from the config file
-    api_key = config["api_key"]
-    base_url = config["model_server_base_url"]
+    api_key = "6TPQHX6-K6J4035-N611BBS-NK8ZMYX"
+    base_url = "http://localhost:3001/api/v1"
 
     # call the auth function
     auth(api_key, base_url)

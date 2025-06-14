@@ -1,4 +1,0 @@
-api_key: "6TPQHX6-K6J4035-N611BBS-NK8ZMYX"
-model_server_base_url: "http://localhost:3001/api/v1"
-workspace_slug: "ingredients_awareness"
-stream_timeout: 60

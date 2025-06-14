@@ -2,18 +2,18 @@ import requests
 import yaml
 from flask import Flask, request, jsonify
 
-class IngredientsAwareness:
+
+class RecipeGeneration:
     def __init__(self):
         pass
 
     def chat(self, message: str) -> str:
-
         with open("config.yaml", "r") as file:
             config = yaml.safe_load(file)
 
-        self.api_key = config["api_key"]
-        self.base_url = config["model_server_base_url"]
-        self.workspace_slug = config["workspace_slug"]
+        self.api_key = "6TPQHX6-K6J4035-N611BBS-NK8ZMYX"
+        self.base_url = "http://localhost:3001/api/v1"
+        self.workspace_slug = "recipie_generation"
 
         self.chat_url = f"{self.base_url}/workspace/{self.workspace_slug}/chat"
 
@@ -40,3 +40,4 @@ class IngredientsAwareness:
             return "Response is not valid JSON"
         except Exception as e:
             return f"Chat request failed. Error: {e}"
+
