@@ -17,6 +17,19 @@ export async function loadModel(context, query) {
   return { model, chat };
 }
 
+export async function loadImageModel(context, imagePath) {
+
+  const model = (await client.llm.model("google/gemma-3-4b"));
+  const image = await client.files.prepareImage(imagePath);
+  
+  let chat = Chat.from([
+    { role: "system", content: context },
+    { role: "user", images: [image] },
+  ]);
+
+  return { model, chat };
+}
+
 export async function loadOCRModel(context, imagePath) {
 
   const model = (await client.llm.model("nanonets-ocr-s"));

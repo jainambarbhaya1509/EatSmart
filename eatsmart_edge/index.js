@@ -5,6 +5,7 @@ import {
   homemadeHealthyAlternativeContext,
   ocrScannerContext,
   chatbotContext,
+  heightEstimationContext,
 } from './src/context/contexts.js';
 
 import { homemadeAlternatives } from './src/utils/homemade_alternatives.js';
@@ -14,6 +15,7 @@ import { healthcareChatbot, newChat } from './src/utils/health_chatbot.js';
 import OpenFoodFacts from "openfoodfacts-nodejs";
 import multer from 'multer';
 import { ingredientsAwareness } from './src/utils/ingredient_awareness.js';
+import { heightEstimation } from './src/utils/height_estimation.js';
 
 const app = express();
 app.use(express.json());
@@ -82,10 +84,10 @@ app.get("/chat/:userQuery", async (req, res) => {
   }
 });
 
-// app.get("/reset", (req, res) => {
-//   newChat(chatbotContext);
-//   res.json({ message: "🔄 Chat history reset." });
-// });
+app.get("/reset", (req, res) => {
+  newChat(chatbotContext);
+  res.json({ message: "🔄 Chat history reset." });
+});
 
 
 app.post('/ocr-analysis', upload.single('image'), async (req, res) => {
@@ -98,6 +100,17 @@ app.post('/ocr-analysis', upload.single('image'), async (req, res) => {
     res.status(500).json({ error: 'Failed to perform OCR.', details: err.message });
   }
 });
+
+// app.post('/height-estimation', upload.single('image'), async (req, res) => {
+//   try {
+//     const imagePath = req.file.path;
+//     const result = await heightEstimation(heightEstimationContext, imagePath);
+//     console.log(result);
+//     res.json(result);
+//   } catch (err) {
+//     res.status(500).json({ error: 'Failed to perform OCR.', details: err.message });
+//   }
+// });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
