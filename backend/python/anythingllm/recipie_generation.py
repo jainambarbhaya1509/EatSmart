@@ -1,15 +1,10 @@
 import requests
-import yaml
-from flask import Flask, request, jsonify
-
 
 class RecipeGeneration:
     def __init__(self):
         pass
 
     def chat(self, message: str) -> str:
-        with open("config.yaml", "r") as file:
-            config = yaml.safe_load(file)
 
         self.api_key = "6TPQHX6-K6J4035-N611BBS-NK8ZMYX"
         self.base_url = "http://localhost:3001/api/v1"

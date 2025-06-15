@@ -1,6 +1,4 @@
 import requests
-import yaml
-from flask import Flask, request, jsonify
 
 class Chatbot:
     def __init__(self):
